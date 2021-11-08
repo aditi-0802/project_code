@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <script>
+
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.watchPosition(showPosition);
+  } else { 
+    alert( "Geolocation is not supported by this browser.");
+  }
+}
+    
+function showPosition(position) {
+    document.getElementById("latitude").value=position.coords.latitude;
+     document.getElementById("longitude").value=position.coords.longitude;
+   
+ 
+    var url = 'https://maps.google.com/maps?q='+position.coords.latitude+','+position.coords.longitude+'&Roadmap&z=14&ie=UTF8&iwloc=&output=embed';
+document.getElementById("mapframe").src=url;
+}
+
+     
+</script>
+
+<body onload="getLocation()">
+
+
+
+
+      <form action = "Upload.jsp" method = "post"
+         enctype = "multipart/form-data">
+          Latitude <input type="text" name="latitude" id="latitude">
+          Longitude <input type="text" name="longitude" id="longitude">
+          
+         
+      
+    <p>Type the complaint below</p>
+    <label for="desc">Description</label><br>
+  <input type="text" id="desc" name="desc"><br>
+   Select a file to upload: <br />
+ 
+         <input type = "file" accept ="image/*;capture=camera" name = "file" size = "50" />
+         <br />
+         <input type = "submit" value = "Save" />
+</form>
+
+
+
+      
+<iframe 
+  width="100%" 
+  height="500" 
+  frameborder="0" 
+  scrolling="no" 
+  marginheight="0" 
+  marginwidth="0" 
+  src="" id="mapframe"
+ >
+ </iframe>
+
+</body>
+</html>
+
